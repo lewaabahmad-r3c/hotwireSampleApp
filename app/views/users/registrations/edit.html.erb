@@ -1,0 +1,51 @@
+<% content_for :content do %>
+  <div class="">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: '' }) do |f| %>
+      <%= render 'users/shared/error_messages', resource: resource %>
+
+      <div class="grid gap-y-4">
+        <!-- Email Field
+        <div>
+          <%= f.label :email, class: 'block text-sm mb-2 dark:text-white' %>
+          <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'py-3 px-4 block w-full border-neutral-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-zinc-900 dark:border-neutral-700 dark:text-neutral-400 dark:focus:ring-neutral-600' %>
+        </div>
+
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %> -->
+
+        <!-- Password Field -->
+        <div>
+          <span class="label"><%= f.label :password, "Password (leave blank if you don't want to change it)", class: 'label-text' %></span>
+          <%= f.password_field :password, autocomplete: 'new-password', class: 'input input-bordered w-full' %>
+          <% if @minimum_password_length %>
+            <span class="label-text-alt"><%= @minimum_password_length %> characters minimum</span>
+          <% end %>
+        </div>
+
+        <!-- Password Confirmation Field -->
+        <div>
+          <span class="label"><%= f.label :password_confirmation, class: 'label-text' %></span>
+          <%= f.password_field :password_confirmation, autocomplete: 'new-password', class: 'input input-bordered w-full' %>
+        </div>
+
+        <!-- Current Password Field -->
+        <div>
+          <span class="label"><%= f.label :current_password, 'Current password (we need your current password to confirm your changes)', class: 'label-text' %></span>
+          <%= f.password_field :current_password, autocomplete: 'current-password', class: 'input input-bordered w-full' %>
+        </div>
+
+        <!-- Update Button -->
+        <div>
+          <%= f.submit 'Update', class: 'btn btn-primary' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<% content_for :page_title do %>
+  Update Password
+<% end %>
+
+<%= render 'account/layout' %>

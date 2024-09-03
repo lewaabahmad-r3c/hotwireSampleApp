@@ -1,0 +1,55 @@
+require: 
+  - rubocop-capybara
+  - rubocop-factory_bot
+  - rubocop-rspec
+  - rubocop-rails
+AllCops:
+  NewCops: enable
+  Exclude:
+    - db/schema.rb
+    - db/migrate/*
+    - node_modules/**/*
+    - vendor/bundle/**/*
+    - bin/bundle
+    - spec/models/source_type_spec.rb
+  TargetRubyVersion: 2.7
+Style/Documentation:
+  Enabled: false
+Layout/ParameterAlignment:
+  EnforcedStyle: with_fixed_indentation
+Lint/RaiseException:
+  Enabled: true
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+Lint/StructNewOverride:
+  Enabled: true
+Naming/VariableNumber:
+  EnforcedStyle: snake_case
+Style/ExponentialNotation:
+  Enabled: true
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/HashEachMethods:
+  Enabled: true
+Style/HashTransformKeys:
+  Enabled: true
+Style/HashTransformValues:
+  Enabled: true
+Style/MixinUsage:
+  Enabled: true
+Style/Next:
+  MinBodyLength: 5
+Style/NumericLiterals:
+  Enabled: false
+Style/PercentLiteralDelimiters:
+  Enabled: false
+Style/SignalException:
+  EnforcedStyle: semantic
+Metrics/BlockLength:
+  Exclude:
+    - config/environments/*.rb
+    - config/routes.rb
+    - lib/tasks/*.rake
+    - spec/**/*.rb
+Metrics/MethodLength:
+  Max: 15

@@ -1,0 +1,13 @@
+<%= turbo_stream.update "cart_counter" do %>
+  <%= @cart.total_items %>
+<% end %>
+
+<%= turbo_stream.update "cart_summary" do %>
+  <%= render "cart_items/summary", cart: @cart.reload %>
+<% end %>
+
+<%= turbo_stream.append "cart_notices" do %>
+  <p data-controller="cart-notice confetti" class="mb-3 p-3 border-gray-200 bg-gray-100 rounded-xl">
+    <%= funny_cart_message(@cart.total_items) %>
+  </p>
+<% end %>

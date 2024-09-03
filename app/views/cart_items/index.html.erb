@@ -1,0 +1,49 @@
+<div class="container mx-auto mt-10">
+  <div class="flex shadow-md my-10">
+    <div class="w-full bg-white px-10 py-10">
+      <div class="flex justify-between border-b pb-8">
+        <h1 class="font-semibold text-2xl">Shopping Cart</h1>
+        <h2 class="font-semibold text-2xl"><%= pluralize(@cart.cart_items.count, 'Item') %></h2>
+      </div>
+
+      <% if @cart.cart_items.any? %>
+        <div class="flex mt-10 mb-5">
+          <h3 class="font-semibold text-gray-600 text-xs uppercase w-2/5">Product Details</h3>
+          <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5">Quantity</h3>
+          <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5">Price</h3>
+          <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5">Total</h3>
+        </div>
+
+        <% @cart.cart_items.each do |item| %>
+          <div class="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
+            <div class="flex w-2/5">
+              <div class="w-20">
+                <!-- Placeholder image - replace with actual product image if available -->
+                <img class="h-24" src="https://via.placeholder.com/150" alt="<%= item.product.name %>">
+              </div>
+              <div class="flex flex-col justify-between ml-4 flex-grow">
+                <span class="font-bold text-sm"><%= link_to item.product.name, product_path(item.product) %></span>
+                <%= button_to 'Remove', cart_item_path(item), method: :delete, data: { confirm: 'Are you sure?' }, class: "font-semibold hover:text-red-500 text-gray-500 text-xs" %>
+              </div>
+            </div>
+            <div class="flex justify-center w-1/5">
+              <span class="text-center w-1/5 font-semibold text-sm"><%= item.quantity %></span>
+            </div>
+            <span class="text-center w-1/5 font-semibold text-sm"><%= number_to_currency(item.product.price) %></span>
+            <span class="text-center w-1/5 font-semibold text-sm"><%= number_to_currency(item.total_price) %></span>
+          </div>
+        <% end %>
+
+        <div class="flex justify-between mt-10">
+          <%= link_to 'Continue Shopping', products_path, class: "font-semibold text-indigo-600 text-sm" %>
+          <span class="text-right text-xl font-semibold">Total: <%= number_to_currency(@cart.total_price) %></span>
+        </div>
+      <% else %>
+        <p class="text-center text-lg">Your cart is empty.</p>
+        <div class="flex justify-center mt-10">
+          <%= link_to 'Start Shopping', products_path, class: "font-semibold bg-indigo-600 text-white py-2 px-4 rounded-md" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

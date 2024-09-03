@@ -1,0 +1,4 @@
+<div class="border my-3 shadow rounded p-3">
+    Cart last updated at: <%= Time.now.to_s %>
+    <p>Total: <%= number_to_currency(cart.present? ? cart.total_price : "0") %></p>
+</div>

@@ -1,0 +1,35 @@
+
+<div class="container products m-auto my-12">
+  <div class="flex flex-cols">
+    <img src="<%= image_path("cat.webp") %>" class="w-full max-w-[150px]" />
+    <div id="cart_notices" class="w-full">
+      <div id="cart_summary" class="mb-3 w-full">
+        <%= render "cart_items/summary", cart: @cart.reload %>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex flex-cols w-full border shadow-xl rounded-xl overflow-hidden">
+    <div>
+      <img src="<%= image_path("fish_store_bg.png") %>" class="w-full max-w-[450px]" />
+    </div>
+    <div class="flex-auto p-6">
+      <% @products.each do |product| %>
+        <div class="product p-4 rounded-xl shadow-xl border mb-6">
+          <div class="grid grid-cols-2">
+            <div>
+              <h2 class="font-bold font-lg"><%= product.name %></h2>
+              <p><%= number_to_currency(product.price) %></p>
+            </div>
+            <div>
+              <%= form_with url: cart_items_path, method: :post, format: :turbo_stream, local: true do %>
+                <%= hidden_field_tag :product_id, product.id %>
+                <%= submit_tag 'Add to Cart', class: "btn btn-sm btn-block" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
